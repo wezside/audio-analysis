@@ -42,6 +42,10 @@ void ofApp::keyReleased(int key)
 			soundManager.record();
 			break;
 
+		case 'w': 
+			soundManager.toggleDataWrap();
+			break;
+			
 		case '1': 
 		case '2': 
 		case '3': 

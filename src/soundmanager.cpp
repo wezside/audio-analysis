@@ -73,7 +73,11 @@ void wezside::SoundManager::update()
 				break;	
 		}
 		data_index++;
-		if (data_index >= RECORDING_SIZE) data_index = 0;
+		if (data_index >= RECORDING_SIZE && wrap) data_index = 0;
+		else if (data_index >= RECORDING_SIZE)
+		{
+			recording = false;
+		}
 	}
 }
 
@@ -112,6 +116,8 @@ void wezside::SoundManager::draw()
 	infoString += "\n\nPITCH FREQUENCY " + ofToString(pitch_freq, 3);
 	infoString += "\n\nHIGH FREQUENCY CONTENT " + ofToString(hfc, 3);
 	infoString += "\n\nENERGY " + ofToString(power, 3);
+	infoString += "\n\n";
+	infoString += "DATA WRAP " + (wrap ? "YES" : "NO");
 
 	ofDrawBitmapString(infoString, xoffset, 50);
 }
@@ -119,11 +125,6 @@ void wezside::SoundManager::draw()
 void wezside::SoundManager::setAlgorithm(int key)
 {
 	algorithm = key;
-}
-
-int wezside::SoundManager::getAlgorithm()
-{
-	return algorithm;
 }
 
 void wezside::SoundManager::record()
@@ -147,6 +148,11 @@ void wezside::SoundManager::setRecording(bool val)
 void wezside::SoundManager::setTimecode(int val)
 {
 	timecode = val;
+}
+
+void wezside::SoundManager::toggleDataWrap()
+{
+	wrap = !wrap;
 }
 
 float wezside::SoundManager::getRMSLeft()

@@ -26,19 +26,21 @@ namespace wezside
         	float recording[RECORDING_NUM][RECORDING_SIZE];
 
         	int timecode;
-        	int recording_index;
         	int algorithm;
         	int data_index;
+        	int recording_index;
 
         	bool recording;
+        	bool wrap;
 
 		public:
 			// Default constructor
 			SoundManager()
 			{
+				wrap = false;
 				recording = false;
-				recording_index = 0;
-
+				recording_index = -1;
+				algorithm = '1';
 			}
 
 			// Copy constructor
@@ -63,14 +65,13 @@ namespace wezside
 			void isRecording();
 			void setRecording(bool val);
 			void setAlgorithm(int key);
-			int getAlgorithm();
+			void toggleDataWrap();
 
 			float getRMSLeft();
 			float getRMSRight();
 			float getPitchFreq();
         	float getHFC();
         	float getPower();
-
 
 			float getSmooth();
 			void setSmooth(float val);
