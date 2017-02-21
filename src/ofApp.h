@@ -2,6 +2,8 @@
 
 #include "ofMain.h"
 
+#define RECORD_DURATION 10000
+
 class ofApp : public ofBaseApp{
 
 	public:
@@ -22,4 +24,5 @@ class ofApp : public ofBaseApp{
 		void gotMessage(ofMessage msg);
 
 		wezside::SoundManager soundManager;
+		int record_time;
 };

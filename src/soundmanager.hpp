@@ -4,6 +4,9 @@
 #include "ofMain.h"
 #include "ofxAudioAnalyzer.h"
 
+#define RECORDING_NUM 5
+#define RECORDING_SIZE 1000
+
 namespace wezside
 {
 	class SoundManager
@@ -11,6 +14,7 @@ namespace wezside
 		private:
 			ofSoundStream soundStream;
         	ofxAudioAnalyzer audioAnalyzer;
+        	ofColor colors[RECORDING_NUM];
 
         	// Algorithms
         	float rms_l, rms_r;
@@ -19,22 +23,22 @@ namespace wezside
         	float smooth;
         	float power;
 
-        	float recording_1[1000];
-        	float recording_2[1000];
-        	float recording_3[1000];
-        	float recording_4[1000];
-        	float recording_5[1000];
+        	float recording[RECORDING_NUM][RECORDING_SIZE];
 
+        	int timecode;
         	int recording_index;
+        	int algorithm;
+        	int data_index;
 
         	bool recording;
 
 		public:
 			// Default constructor
-			SoundManager() 
+			SoundManager()
 			{
 				recording = false;
 				recording_index = 0;
+
 			}
 
 			// Copy constructor
@@ -54,6 +58,12 @@ namespace wezside
 			void update();
 			void draw();
 			void exit();
+
+			void record();
+			void isRecording();
+			void setRecording(bool val);
+			void setAlgorithm(int key);
+			int getAlgorithm();
 
 			float getRMSLeft();
 			float getRMSRight();

@@ -12,6 +12,7 @@ void ofApp::setup()
 
 void ofApp::update()
 {
+	soundManager.setTimecode(ofGetElapsedTimeMillis() - record_time);
 	soundManager.update();
 }
 
@@ -21,7 +22,13 @@ void ofApp::draw()
 
 	if (soundManager.isRecording())
 	{
-		
+		ofSetColor(255.0f, 0.0f, 0.0f);
+		ofCircle(ofGetWidth() - 50.0f, 20.0f, 20.0f);
+	}
+
+	if (ofGetElapsedTimeMillis() - record_time > RECORD_DURATION)
+	{
+		soundManager.setRecording(false);
 	}
 }
 
@@ -31,7 +38,20 @@ void ofApp::keyReleased(int key)
 	switch (key)
 	{
 		case 'r': 
+			record_time = ofGetElapsedTimeMillis();
 			soundManager.record();
+			break;
+
+		case '1': 
+		case '2': 
+		case '3': 
+		case '4': 
+		case '5': 
+		case '6': 
+		case '7': 
+		case '8': 
+		case '9': 
+			soundManager.setAlgorithm(key);
 			break;
 	}
 }
