@@ -82,6 +82,7 @@ void wezside::SoundManager::draw()
 
 void wezside::SoundManager::record()
 {
+    if (recording) return;
     if (record_index < NUM_OF_RECORDINGS)
     {
         record_index++;

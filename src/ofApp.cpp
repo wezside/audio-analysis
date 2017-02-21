@@ -18,6 +18,11 @@ void ofApp::update()
 void ofApp::draw()
 {
 	soundManager.draw();
+
+	if (soundManager.isRecording())
+	{
+		
+	}
 }
 
 void ofApp::keyPressed(int key){}
